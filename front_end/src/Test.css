@@ -1,4 +1,4 @@
-.App {
+.Test {
   text-align: center;
 }
 
@@ -8,12 +8,12 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .Test-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
+.Test-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -24,7 +24,7 @@
   color: white;
 }
 
-.App-link {
+.Test-link {
   color: #61dafb;
 }
 

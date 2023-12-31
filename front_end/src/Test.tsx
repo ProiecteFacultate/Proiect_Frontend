@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
+import './Test.css';
 import { firestore } from './firebase.js';
 import { addDoc, collection } from '@firebase/firestore'
 
-function App() {
+function Test() {
   const ref = collection(firestore, "Users");
   const clickHandle = (event : any) => {
     let data = {
@@ -18,11 +18,11 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="Test">
       <p>Hello</p>
       <button onClick={clickHandle}>Click</button>
     </div>
   );
 }
 
-export default App;
+export default Test;
