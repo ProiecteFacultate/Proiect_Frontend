@@ -1,0 +1,19 @@
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.textField {
+    width: 20%;
+}
+
+.registerButton {
+    width: 10%;
+}
+
+.registerAlert {
+    width: 30%;
+    margin: 1rem;
+}

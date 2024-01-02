@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+.authNavbar {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 2rem;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.authNavbar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.authNavbar a {
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+}
+
+.authNavbar li:hover {
+    background-color: #777;
+}
+
+.authNavbar li.active {
+    background-color: #555;
+}

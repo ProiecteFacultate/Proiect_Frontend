@@ -1,0 +1,19 @@
+.logInForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.textField {
+    width: 20%;
+}
+
+.logInButton {
+    width: 10%;
+}
+
+.logInAlert {
+    width: 30%;
+    margin: 1rem;
+}
