@@ -6,6 +6,9 @@ function HomeNavbar({ data }) {
         <p>{data.navBarTitle}</p>
         <ul>
             <li>
+                <a href='/home'>Home</a>
+            </li>
+            <li>
                 <a href='/profile'>My profile</a>
             </li>
             <li>

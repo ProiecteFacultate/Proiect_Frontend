@@ -9,8 +9,7 @@ import {  } from '../store/actions/action.ts';
 
 function HomePage() {
   const userData = useSelector((state : any) => state.userData)
-  console.log("HOME")
-  console.log(userData)
+
     return (
       <>
        <HomeNavbar data={{navBarTitle: "Home Page"}}></HomeNavbar>
