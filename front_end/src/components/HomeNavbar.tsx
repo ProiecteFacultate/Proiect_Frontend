@@ -1,7 +1,23 @@
 import React, { useState } from 'react';
 import '../css/HomeNavbar.css'
+import { useSelector, useDispatch } from 'react-redux';
+import { visitProfile } from '../store/actions/action.ts';
 
 function HomeNavbar({ data }) {
+    const dispatch = useDispatch();
+
+    const visitedProfileData = useSelector((state : any) => state.visitedProfileData);
+    const userData = useSelector((state : any) => state.userData);
+
+    const onProfileButtonClick = () => {
+        let visitProfilePayload = {
+            username: userData.username,
+            tag: userData.tag
+        }
+
+        dispatch(visitProfile(visitProfilePayload));
+    }
+    
     return <nav className='homeNavbar'>
         <p>{data.navBarTitle}</p>
         <ul>
@@ -9,7 +25,7 @@ function HomeNavbar({ data }) {
                 <a href='/home'>Home</a>
             </li>
             <li>
-                <a href='/profile'>My profile</a>
+                <a href='/profile' onClick={visitProfile}>My profile</a>
             </li>
             <li>
                 <a href='/authentication/login'>Log out</a>

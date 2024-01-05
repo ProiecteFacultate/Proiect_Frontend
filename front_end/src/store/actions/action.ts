@@ -4,3 +4,10 @@ export const logInUser = (payload : any) : any => {
         payload : payload
     }
 }
+
+export const visitProfile = (payload : any) : any => {
+    return {
+        type : "VISIT_PROFILE",
+        payload : payload
+    }
+}

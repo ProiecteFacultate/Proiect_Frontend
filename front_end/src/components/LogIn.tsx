@@ -20,7 +20,8 @@ function Register() {
   useEffect(() => {   //in case we came on /authentication/login after using log out button
     let loginPayload = {
       isAuthenticated: false,
-      username: ''
+      username: '',
+      tag: ''
   }
     dispatch(logInUser(loginPayload));
   })
@@ -46,7 +47,8 @@ function Register() {
                 setAlertVisible(() => false);
                 let loginPayload = {
                     isAuthenticated: true,
-                    username: qSnap.docs[0].data().username
+                    username: qSnap.docs[0].data().username, 
+                    tag: qSnap.docs[0].data().tag
                 }
                 dispatch(logInUser(loginPayload));
                 navigate('/home');

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import '../css/Register.css'
 import { firestore } from '../firebase';
 import { addDoc, collection, query, where, getDocs } from '@firebase/firestore'
@@ -16,18 +17,28 @@ function Register() {
   const onSubmitHandler = (event : any): void => {
     event.preventDefault();
     const usersCollectionRef = collection(firestore, "Users");
+    const profilesCollectionRef = collection(firestore, "Profiles");
 
-    let registerData = {
+    const tag = uuidv4();
+    let usersCollectionData = {
+      tag: tag,
       email: email,
       username: username,
-      password: password
-    }
+      password: password,
+    };
+
+    let profilesCollectionData = {
+      tag: tag,
+      username: username,
+      description: "Default description"
+    };
 
     try {
       const q = query(usersCollectionRef, where("username", "==", username));
       getDocs(q).then((qSnap) => { 
         if(qSnap.empty === true) {
-          addDoc(usersCollectionRef, registerData);
+          addDoc(usersCollectionRef, usersCollectionData);
+          addDoc(profilesCollectionRef, profilesCollectionData);
           setAlertType(() => "success");    
           setAlertMessage(() => "Account successfully created!")  
         }

@@ -1,0 +1,74 @@
+.mainDiv {
+    background-color: red;
+    height: 100%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.profileImageAndCameraContainer {
+    position: relative;
+    display: inline;
+    align-self: center;
+}
+
+.profileImageContainer {
+    background-color: aliceblue;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    align-self: center;
+}
+
+.profileImage {
+    object-fit: contain;
+    object-position: center;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.cameraIconContainer {
+    background-color: #cfcfcf;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.cameraIconImage {
+    object-fit:contain;
+    width: 100%;
+    height: 100%;
+}
+
+.profileInfoContainer {
+    background-color: green;
+}
+
+.usernameText {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px;
+}
+
+.descriptionText {
+    font-size: 30px;
+    text-align: center;
+    margin: 10px;
+}
+
+.photosPostsContainer {
+    background-color: blue;
+}
+
+.photosPostsFrame {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
