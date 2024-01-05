@@ -11,14 +11,18 @@ import { logInUser } from '../store/actions/action.ts';
 function PhotoComment( {data} ) {
     const photoUrl = data.photoUrl;
     const photoOwnerTag = data.photoOwnerTag;
-  
-    const deletePhotoPost = () => {
+    const photoUUID = data.photoUUID;
+    const commentText = data.commentText;
+    const commenterUsername = data.commenterUsername;
     
-      return (
+    return (
         <>
+          <div className='photoCommentMainDiv'>
+            <p className='commenterUsernameP'>{commenterUsername}</p>
+            <p className='commentTextP'>{commentText}</p>
+          </div>
         </>
-      );
+    );
   }
-}
     
 export default PhotoComment;

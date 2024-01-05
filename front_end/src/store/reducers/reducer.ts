@@ -19,8 +19,19 @@ const visitedProfileData = (state = {username : "", tag : ""}, action : any) => 
     }
 }
 
+const viewedPhotoPostData = (state = {photoURL : "", photoOwnerTag : "", photoUUID : ""}, action : any) => {
+    switch(action.type) {
+        case 'VIEW_PHOTO_POST':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 const reducersList = combineReducers({
-    userData
+    userData,
+    visitedProfileData,
+    viewedPhotoPostData
 })
 
 export default reducersList;

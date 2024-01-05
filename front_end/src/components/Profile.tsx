@@ -11,9 +11,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { visitProfile } from '../store/actions/action.ts';
 import default_profile_image from '../images/default_profile_image.png';
 import camera_icon from '../images/camera_icon.png';
+import add_icon from '../images/add_icon.png';
 
 function Profile() {
-  const fileInputRef = useRef(null);
+  const addProfilePhotoFileRef = useRef(null);
+  const addPhotoPostFileRef = useRef(null);
   const userData = useSelector((state : any) => state.userData)
   const visitedProfileData = useSelector((state : any) => state.userData)
 
@@ -94,7 +96,11 @@ function Profile() {
   } )
 
   const uploadProfileButtonClick = () => {
-    fileInputRef.current.click();
+    addProfilePhotoFileRef.current.click();
+  }
+
+  const uploadPhotoPostButtonClick = () => {
+    addPhotoPostFileRef.current.click();
   }
 
   const uploadProfileImage = (imageToUpload) => {
@@ -145,7 +151,7 @@ function Profile() {
               type="file"
               onChange={(event) => uploadProfileImage(event.target.files[0])}
               style={{ display: 'none' }}
-              ref={fileInputRef}
+              ref={addProfilePhotoFileRef}
             />
             <img
               src={camera_icon}
@@ -165,10 +171,22 @@ function Profile() {
 
 
         <div className='photosPostsContainer'>
-          <input
+
+          <div className='addPhotoIconContainer'>
+            <input
               type="file"
               onChange={(event) => uploadPhoto(event.target.files[0])}
-          />
+              style={{ display: 'none' }}
+              ref={addPhotoPostFileRef}
+            />
+            <img
+              src={camera_icon}
+              className='addIconImage'
+              alt="Camera Icon"
+              onClick={uploadPhotoPostButtonClick}
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
 
           <div className='photosPostsFrame'>  
             {

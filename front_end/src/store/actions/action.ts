@@ -11,3 +11,10 @@ export const visitProfile = (payload : any) : any => {
         payload : payload
     }
 }
+
+export const viewPhotoPost= (payload : any) : any => {
+    return {
+        type : "VIEW_PHOTO_POST",
+        payload : payload
+    }
+}

@@ -6,6 +6,7 @@ import LogIn from './components/LogIn.tsx';
 import HomePage from './components/Home.tsx';
 import { ProtectedRoute } from './components/ProtectedRoute.tsx';
 import Profile from './components/Profile.tsx';
+import PhotoCommentsPanel from './components/PhotoCommentsPanel.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -26,8 +27,7 @@ export const router = createBrowserRouter([
         <ProtectedRoute>
             <HomePage />
         </ProtectedRoute>
-      </>
-        
+      </> 
     },
     {
       path: "/profile",
@@ -36,6 +36,13 @@ export const router = createBrowserRouter([
             <Profile />
         </ProtectedRoute>
       </>
-        
+    },
+    {
+      path: "/photo",
+      element: <>
+        <ProtectedRoute>
+            <PhotoCommentsPanel />
+        </ProtectedRoute>
+      </>
     }
   ]);

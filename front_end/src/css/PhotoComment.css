@@ -1,0 +1,22 @@
+.photoCommentMainDiv {
+    background-color: aqua;
+    width: 100%;
+    padding: 10px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+.commenterUsernameP {
+    display: block;
+    font-weight: bolder;
+    font-size: 30px;
+    margin: 0;
+}
+
+.commentTextP {
+    display: block;
+    font-size: 15px;
+    margin: 0;
+}
