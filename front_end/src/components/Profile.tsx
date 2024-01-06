@@ -14,6 +14,9 @@ import camera_icon from '../images/camera_icon.png';
 import add_icon from '../images/add_icon.png';
 
 function Profile() {
+  const profilesCollectionRef = collection(firestore, "Profiles");
+  const photoInfoCollectionRef = collection(firestore, "PhotoInfo");
+
   const addProfilePhotoFileRef = useRef(null);
   const addPhotoPostFileRef = useRef(null);
   const userData = useSelector((state : any) => state.userData)
@@ -25,7 +28,6 @@ function Profile() {
   const [photosUrls, setPhotosUrls] = useState<any>([])
 
   const retrieveProfileInfo = async () => {
-    const profilesCollectionRef = collection(firestore, "Profiles");
     try {
       const q = query(profilesCollectionRef, where("tag", "==", visitedProfileData.tag));
       getDocs(q).then((qSnap) => { 
@@ -72,7 +74,7 @@ function Profile() {
       );
 
       setPhotosUrls(() => photosUrlList) 
-      // console.log("Retrieved photo posts")
+       console.log("Retrieved photo posts")
     }
     catch(e) {
       console.log("Couldn't get phtos" + e);
@@ -127,7 +129,14 @@ function Profile() {
 
     uploadBytes(photosRef, photoToUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
-       // setProfileImageUrl(() => url);
+        let photoInfoData = {
+          url: url,
+          photoID: photoId,
+          ownerTag: userData.tag,    //butonul pt adaugare de poze ar trebui sa apara doar daca cel care viziteaza e ownerul
+          ownerUsername: userData.username
+        }
+
+        addDoc(photoInfoCollectionRef, photoInfoData);
       })
     })
   }

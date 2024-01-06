@@ -10,6 +10,7 @@ import HomeNavbar from './HomeNavbar.tsx';
 import PhotoComment from './PhotoComment.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInUser } from '../store/actions/action.ts';
+import { delay } from '@reduxjs/toolkit/dist/utils';
 
 
 function PhotoCommentsPanel() {
@@ -20,7 +21,7 @@ function PhotoCommentsPanel() {
     const photoData = useSelector((state : any) => state.viewedPhotoPostData)
 
     const [addedComment, setAddedComment] = useState('');
-    const [commentsList, setCommentsList] = useState<object[]>([]);
+    const [commentsToBeDisplayedList, setCommentsToBeDisplayedList] = useState<object[]>([]);
     
     const submitComment = (event : any) : void => {
         event.preventDefault();
@@ -43,32 +44,34 @@ function PhotoCommentsPanel() {
         setAddedComment(() => '')
     }
 
-    const retrieveComments = () => {
+    const retrieveComments = async () => {
         try {
-          setCommentsList(() => [])
-    
+          setCommentsToBeDisplayedList([])
+          
           const q = query(photoCommentsCollectionRef, where("ownerTag", "==", photoData.photoOwnerTag), 
                            where("photoUUID", "==", photoData.photoUUID));
   
-          getDocs(q).then((qSnap) => { 
-            qSnap.docs.forEach((doc) => {
+          const qSnap = await getDocs(q);
+          const commentsList = await Promise.all(
+            qSnap.docs.map(async (doc) => {
 
-                const userQ = query(usersCollectionRef, where("tag", "==", photoData.photoOwnerTag));
-                getDocs(userQ).then((userQsnap) => {
-         
-                    let commentData = {
-                        commentText: doc.data().comment,
-                        commenterTag: doc.data().commenterTag,
-                        commenterUsername: userQsnap.docs[0].data().username,
-                        ownerTag: doc.data().ownerTag,
-                        photoUUID: doc.data().photoUUID
-                    }
-  
-                    setCommentsList((prev) => [...prev, commentData]);
-                })   
+              const userQ = query(usersCollectionRef, where("tag", "==", photoData.photoOwnerTag));
+              const userQsnap = await getDocs(userQ);
+
+              let commentData = {
+                commentText: doc.data().comment,
+                commenterTag: doc.data().commenterTag,
+                commenterUsername: userQsnap.docs[0].data().username,
+                ownerTag: doc.data().ownerTag,
+                photoUUID: doc.data().photoUUID
+              }
+
+              return commentData;
             })
-          });
+          );
 
+          setCommentsToBeDisplayedList(() => commentsList)
+       
           console.log("Comments extracted")
         }
         catch(e) {
@@ -108,7 +111,7 @@ function PhotoCommentsPanel() {
 
             <div className='commentsDiv'>
             {
-              commentsList.map(comment => (
+              commentsToBeDisplayedList.map(comment => (
                 <PhotoComment key={uuidv4()}
                    data={{commentText: comment.commentText, commenterTag: comment.commenterTag, 
                  ownerTag: comment.ownerTag, commenterUsername: comment.commenterUsername, photoUUID:comment.photoUUID}}/>
