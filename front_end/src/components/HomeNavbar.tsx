@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../css/HomeNavbar.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { visitProfile } from '../store/actions/action.ts';
 
 function HomeNavbar({ data }) {
     const dispatch = useDispatch();
-
-    const visitedProfileData = useSelector((state : any) => state.visitedProfileData);
+    
     const userData = useSelector((state : any) => state.userData);
 
     const onProfileButtonClick = () => {

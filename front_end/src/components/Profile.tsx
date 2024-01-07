@@ -3,12 +3,10 @@ import '../css/Profile.css'
 import HomeNavbar from './HomeNavbar.tsx';
 import PhotoPost from './PhotoPost.tsx';
 import { firestore, firebaseStorage } from '../firebase.js';
-import { getDownloadURL, getStorage, listAll, list, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, list, ref, uploadBytes } from "firebase/storage";
 import { addDoc, collection, query, where, getDocs } from '@firebase/firestore'
 import { v4 as uuidv4 } from 'uuid';
-import { Button, TextField, Alert, AlertColor } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { visitProfile } from '../store/actions/action.ts';
+import { useSelector } from 'react-redux';
 import default_profile_image from '../images/default_profile_image.png';
 import camera_icon from '../images/camera_icon.png';
 import add_icon from '../images/add_icon.png';

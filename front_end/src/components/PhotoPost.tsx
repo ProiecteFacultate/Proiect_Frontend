@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import '../css/PhotoPost.css'
 import { firebaseStorage, firestore } from '../firebase';
 import { collection, query, where, getDocs, doc, deleteDoc } from '@firebase/firestore'
-import { getDownloadURL, getStorage, listAll, list, ref, uploadBytes, deleteObject } from "firebase/storage";
-import { Button, TextField, Alert } from '@mui/material';
+import { ref, deleteObject } from "firebase/storage";
 import { useDispatch, useSelector } from 'react-redux';
 import { viewPhotoPost } from '../store/actions/action.ts';
 import trash_icon from '../images/trash_icon.png';

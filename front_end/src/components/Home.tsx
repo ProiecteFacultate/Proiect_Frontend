@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../css/Home.css';
 import HomeNavbar from './HomeNavbar.tsx';
 import HomePhotoPanel from './HomePhotoPanel.tsx';
-import { firestore, firebaseStorage } from '../firebase.js';
-import { addDoc, collection, query, where, getDocs } from '@firebase/firestore';
-import { getDownloadURL, getStorage, listAll, list, ref, uploadBytes } from "firebase/storage";
-import { Button, TextField, Alert, AlertColor } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { firestore } from '../firebase.js';
+import { collection, query, getDocs } from '@firebase/firestore';
 import {  } from '../store/actions/action.ts';
 
 function HomePage() {

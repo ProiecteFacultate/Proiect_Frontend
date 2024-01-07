@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
 import '../css/PhotoCommentsPanel.css'
-import { firebaseStorage, firestore } from '../firebase';
+import { firestore } from '../firebase';
 import { v4 as uuidv4 } from 'uuid';
 import { collection, query, where, getDocs, addDoc } from '@firebase/firestore'
-import { getDownloadURL, getStorage, listAll, list, ref, uploadBytes, deleteObject } from "firebase/storage";
-import { Button, TextField, Alert } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import HomeNavbar from './HomeNavbar.tsx';
 import PhotoComment from './PhotoComment.tsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { logInUser } from '../store/actions/action.ts';
-import { delay } from '@reduxjs/toolkit/dist/utils';
-
+import { useSelector } from 'react-redux';
 
 function PhotoCommentsPanel() {
     const photoCommentsCollectionRef = collection(firestore, "PhotoComments");
@@ -108,7 +103,7 @@ function PhotoCommentsPanel() {
             </div>
 
             <form onSubmit={submitComment} className='addCommentForm'>
-               <TextField className='photoCommentTextField'
+               <TextField className='hotoCommentTextField'
                  label="Your comment"
                  onChange={(event : any) => setAddedComment( () => event.target.value)}
                  value={addedComment}
