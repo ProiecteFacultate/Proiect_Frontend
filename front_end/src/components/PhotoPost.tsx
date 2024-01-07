@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../css/PhotoPost.css'
 import { firebaseStorage, firestore } from '../firebase';
-import { collection, query, where, getDocs } from '@firebase/firestore'
+import { collection, query, where, getDocs, doc, deleteDoc } from '@firebase/firestore'
 import { getDownloadURL, getStorage, listAll, list, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { Button, TextField, Alert } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { viewPhotoPost } from '../store/actions/action.ts';
 import trash_icon from '../images/trash_icon.png';
 
@@ -16,13 +16,26 @@ function PhotoPost( {data} ) {
   const photoUrl = data.photoUrl;
   const photoOwnerTag = data.photoOwnerTag;
 
-  const deletePhotoPost = () => {
+  const userData = useSelector((state : any) => state.userData)
+  const visitedProfileData = useSelector((state : any) => state.visitedProfileData)
+
+  const deletePhotoPost = async () => {
     const photoUUID = extractPhotoUUIDFromPhotoUrl();
     const imageToDeleteRef = ref(firebaseStorage, `photos/` + photoOwnerTag + "/" + photoUUID);
+    const photoInfoCollectionRef = collection(firestore, "PhotoInfo");
+    const photoCommentsCollectionRef = collection(firestore, "PhotoComments");
 
     deleteObject(imageToDeleteRef)
-        .then(() => {
-          console.log("Deleted photo post");
+        .then(async () => {
+          const q = query(photoInfoCollectionRef, where("photoID", "==", photoUUID));
+          const qSnap = await getDocs(q);
+          const photoInfoDocToDeleteRef = doc(firestore, "PhotoInfo", qSnap.docs[0].id);
+          await deleteDoc(photoInfoDocToDeleteRef);
+
+          const q2 = query(photoCommentsCollectionRef, where("photoUUID", "==", photoUUID));
+          const qSnap2 = await getDocs(q2);
+          const photoCommentDocToDeleteRef = doc(firestore, "PhotoInfo", qSnap2.docs[0].id);
+          await deleteDoc(photoCommentDocToDeleteRef);
         })
         .catch((e) => {
           console.log("Could not delete photo post " + e);
@@ -58,6 +71,7 @@ function PhotoPost( {data} ) {
               style={{ cursor: 'pointer' }}
               className='photo'
             />
+            { userData.tag === visitedProfileData.tag &&
             <div className='deleteIconContainer'>
             <img 
               src={trash_icon}
@@ -67,6 +81,7 @@ function PhotoPost( {data} ) {
               className='deleteIcon'
             />
             </div>
+            }
           </div>
         </div>
       </>

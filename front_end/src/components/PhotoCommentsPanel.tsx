@@ -21,10 +21,12 @@ function PhotoCommentsPanel() {
     const photoData = useSelector((state : any) => state.viewedPhotoPostData)
 
     const [addedComment, setAddedComment] = useState('');
+    const [addedSentComment, setAddedSentComment] = useState('');
     const [commentsToBeDisplayedList, setCommentsToBeDisplayedList] = useState<object[]>([]);
     
     const submitComment = (event : any) : void => {
         event.preventDefault();
+        setAddedSentComment(addedComment);
 
         try {
             let commentData = {
@@ -81,7 +83,7 @@ function PhotoCommentsPanel() {
 
       useEffect( () => {
         retrieveComments();
-      }, [addedComment]);  
+      }, [addedSentComment]);  
     
     return (
         <>
@@ -95,8 +97,18 @@ function PhotoCommentsPanel() {
               />
             </div>
 
+            <div className='commentsDiv'>
+            {
+              commentsToBeDisplayedList.map(comment => (
+                <PhotoComment key={uuidv4()}
+                   data={{commentText: comment.commentText, commenterTag: comment.commenterTag, 
+                 ownerTag: comment.ownerTag, commenterUsername: comment.commenterUsername, photoUUID:comment.photoUUID}}/>
+              ))
+            }
+            </div>
+
             <form onSubmit={submitComment} className='addCommentForm'>
-               <TextField className='textField'
+               <TextField className='photoCommentTextField'
                  label="Your comment"
                  onChange={(event : any) => setAddedComment( () => event.target.value)}
                  value={addedComment}
@@ -108,16 +120,6 @@ function PhotoCommentsPanel() {
 
               <Button type="submit" variant="outlined" color="secondary" className="addCommentButton">Add</Button>
             </form>
-
-            <div className='commentsDiv'>
-            {
-              commentsToBeDisplayedList.map(comment => (
-                <PhotoComment key={uuidv4()}
-                   data={{commentText: comment.commentText, commenterTag: comment.commenterTag, 
-                 ownerTag: comment.ownerTag, commenterUsername: comment.commenterUsername, photoUUID:comment.photoUUID}}/>
-              ))
-            }
-            </div>
           
           </div>
         </>

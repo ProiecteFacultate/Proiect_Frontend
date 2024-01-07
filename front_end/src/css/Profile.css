@@ -1,5 +1,4 @@
 .mainDiv {
-    background-color: red;
     height: 100%;
     width: 50%;
     margin-left: auto;
@@ -47,7 +46,7 @@
 }
 
 .profileInfoContainer {
-    background-color: green;
+    
 }
 
 .usernameText {
@@ -57,14 +56,14 @@
     margin: 10px;
 }
 
-.descriptionText {
+/* .descriptionText {
     font-size: 30px;
     text-align: center;
     margin: 10px;
-}
+} */
 
 .photosPostsContainer {
-    background-color: blue;
+    background-color: rgb(184, 222, 255);
 }
 
 .photosPostsFrame {

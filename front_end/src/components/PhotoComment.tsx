@@ -20,6 +20,7 @@ function PhotoComment( {data} ) {
           <div className='photoCommentMainDiv'>
             <p className='commenterUsernameP'>{commenterUsername}</p>
             <p className='commentTextP'>{commentText}</p>
+            <hr className='photoPostHr'></hr>
           </div>
         </>
     );

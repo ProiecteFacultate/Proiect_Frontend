@@ -22,8 +22,8 @@ function Register() {
     const tag = uuidv4();
     let usersCollectionData = {
       tag: tag,
-      email: email,
-      username: username,
+      email: email.trim(),
+      username: username.trim(),
       password: password,
     };
 
@@ -58,7 +58,7 @@ function Register() {
       <>
         <AuthNavbar data={{navBarTitle: "Register Page"}}></AuthNavbar>
         <form onSubmit={onSubmitHandler} className='registerForm'>
-        <TextField className='textField'
+        <TextField className='registerFormTextField'
               label="Email"
               onChange={(event : any) => setEmail( () => event.target.value)}
               value={email}
@@ -68,7 +68,7 @@ function Register() {
               type="email"
               sx={{mb : 3}}
           />
-          <TextField className='textField'
+          <TextField className='registerFormTextField'
               label="Username"
               onChange={(event : any) => setUsername( () => event.target.value)}
               value={username}
@@ -78,7 +78,7 @@ function Register() {
               type="text"
               sx={{mb : 3}}
           />
-           <TextField className='textField'
+           <TextField className='registerFormTextField'
               label="Password"
               onChange={(event : any) => setPassword( () => event.target.value)}
               value={password}

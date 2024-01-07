@@ -26,7 +26,9 @@ function HomePage() {
       let index = photoInfoIndexes[i];
       let info = {
         url: qSnap.docs[index].data().url,
-        ownerUsername: qSnap.docs[index].data().ownerUsername
+        ownerTag: qSnap.docs[index].data().ownerTag,
+        ownerUsername: qSnap.docs[index].data().ownerUsername,
+        photoUUID: qSnap.docs[index].data().photoID
       }
       photosInfo = [...photosInfo, info];
     }
@@ -57,9 +59,8 @@ function HomePage() {
 
   useEffect( () => {
     retrieveRandomPhotosWithProfileInfo();
-  })
-
-  const userData = useSelector((state : any) => state.userData)
+    console.log("Retrieved photos for home page")
+  }, []);
 
     return (
       <>
@@ -68,7 +69,8 @@ function HomePage() {
        <div className='homeMainContainer'>
           {
               photosCompleteInfo.map(photoData => (
-                <HomePhotoPanel key={photoData.url} data={{url: photoData.url, ownerUsername: photoData.ownerUsername}}/>
+                <HomePhotoPanel key={photoData.url} data={{url: photoData.url, ownerUsername: photoData.ownerUsername,
+                                photoUUID: photoData.photoUUID, ownerTag: photoData.ownerTag}}/>
               ))
           }
        </div>

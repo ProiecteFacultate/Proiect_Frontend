@@ -20,7 +20,7 @@ function Profile() {
   const addProfilePhotoFileRef = useRef(null);
   const addPhotoPostFileRef = useRef(null);
   const userData = useSelector((state : any) => state.userData)
-  const visitedProfileData = useSelector((state : any) => state.userData)
+  const visitedProfileData = useSelector((state : any) => state.visitedProfileData)
 
   const [profileImageUrl, setProfileImageUrl] = useState("");
   const [profileUsername, setProfileUsername] = useState("");
@@ -83,17 +83,17 @@ function Profile() {
 
 
   useEffect( () => {
-    const interval = setInterval(retrieveProfileImage, 3000);
+    const interval = setInterval(retrieveProfileImage, 2000);
     return () => clearInterval(interval);
   }, [profileImageUrl]);
 
   useEffect( () => {
-    const interval = setInterval(retrieveProfileInfo, 3000);
+    const interval = setInterval(retrieveProfileInfo, 2000);
     return () => clearInterval(interval);
   } )
 
   useEffect( () => {
-    const interval = setInterval(retrievePhotoPosts, 3000);
+    const interval = setInterval(retrievePhotoPosts, 2000);
     return () => clearInterval(interval);
   } )
 
@@ -155,7 +155,8 @@ function Profile() {
               alt="Profile Image"
             />
           </div>
-          <div className='cameraIconContainer'>
+          { userData.tag === visitedProfileData.tag &&
+            <div className='cameraIconContainer'>
             <input
               type="file"
               onChange={(event) => uploadProfileImage(event.target.files[0])}
@@ -170,17 +171,18 @@ function Profile() {
               style={{ cursor: 'pointer' }}
             />
           </div>
+          }
         </div>
 
 
         <div className='profileInfoContainer'>
           <p className='usernameText'>{profileUsername}</p>
-          <p className='descriptionText'>{profileDescription}</p>
+          {/* <p className='descriptionText'>{profileDescription}</p> */}
         </div>
 
 
         <div className='photosPostsContainer'>
-
+          { userData.tag === visitedProfileData.tag &&
           <div className='addPhotoIconContainer'>
             <input
               type="file"
@@ -189,14 +191,14 @@ function Profile() {
               ref={addPhotoPostFileRef}
             />
             <img
-              src={camera_icon}
+              src={add_icon}
               className='addIconImage'
               alt="Camera Icon"
               onClick={uploadPhotoPostButtonClick}
               style={{ cursor: 'pointer' }}
             />
           </div>
-
+          }
           <div className='photosPostsFrame'>  
             {
               photosUrls.map(url => (

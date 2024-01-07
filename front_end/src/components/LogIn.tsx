@@ -31,7 +31,7 @@ function Register() {
     const usersCollectionRef = collection(firestore, "Users");
 
     try {
-      const q = query(usersCollectionRef, where("username", "==", username));
+      const q = query(usersCollectionRef, where("username", "==", username.trim()));
       getDocs(q).then((qSnap) => { 
         if(qSnap.empty === true) {
             setAlertVisible(() => true);
@@ -64,7 +64,7 @@ function Register() {
       <>
         <AuthNavbar data={{navBarTitle: "LogIn Page"}}></AuthNavbar>
         <form onSubmit={onSubmitHandler} className='logInForm'>
-          <TextField className='textField'
+          <TextField className='loginFormTextField'
               label="Username"
               onChange={(event : any) => setUsername( () => event.target.value)}
               value={username}
@@ -74,7 +74,7 @@ function Register() {
               type="text"
               sx={{mb : 3}}
           />
-           <TextField className='textField'
+           <TextField className='loginFormTextField'
               label="Password"
               onChange={(event : any) => setPassword( () => event.target.value)}
               value={password}

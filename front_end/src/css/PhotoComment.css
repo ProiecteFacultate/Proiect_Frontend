@@ -1,11 +1,9 @@
 .photoCommentMainDiv {
-    background-color: aqua;
     width: 100%;
     padding: 10px;
     height: fit-content;
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
 }
 
 .commenterUsernameP {
@@ -13,10 +11,18 @@
     font-weight: bolder;
     font-size: 30px;
     margin: 0;
+    margin-bottom: 10px;
 }
 
 .commentTextP {
     display: block;
     font-size: 15px;
     margin: 0;
+}
+
+.photoPostHr {
+    width: 100%;
+    height: 2px;
+    border: 0;
+    background-color: black;
 }

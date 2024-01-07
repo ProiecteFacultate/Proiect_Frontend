@@ -25,7 +25,7 @@ function HomeNavbar({ data }) {
                 <a href='/home'>Home</a>
             </li>
             <li>
-                <a href='/profile' onClick={visitProfile}>My profile</a>
+                <a href='/profile' onClick={onProfileButtonClick}>My profile</a>
             </li>
             <li>
                 <a href='/authentication/login'>Log out</a>
