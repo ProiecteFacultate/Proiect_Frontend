@@ -81,17 +81,17 @@ function Profile() {
 
 
   useEffect( () => {
-    const interval = setInterval(retrieveProfileImage, 2000);
+    const interval = setInterval(retrieveProfileImage, 500);
     return () => clearInterval(interval);
   }, [profileImageUrl]);
 
   useEffect( () => {
-    const interval = setInterval(retrieveProfileInfo, 2000);
+    const interval = setInterval(retrieveProfileInfo, 500);
     return () => clearInterval(interval);
   } )
 
   useEffect( () => {
-    const interval = setInterval(retrievePhotoPosts, 2000);
+    const interval = setInterval(retrievePhotoPosts, 500);
     return () => clearInterval(interval);
   } )
 
